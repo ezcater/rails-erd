@@ -4,7 +4,7 @@
 </table>
 <% if attributes.any? %>
 |
-<table border="0" align="left" cellspacing="2" cellpadding="0" width="<%= NODE_WIDTH + 4 %>">
+<table <%= table_style(entity, attributes) %>>
 <%   attributes.each do |attribute| %>
   <tr><td <%= row_style(entity, attribute) %> port="<%= attribute %>"><%= attribute %>
     <font face="<%= FONTS[:italic] %>" color="grey60"><%= attribute.type_description %></font>

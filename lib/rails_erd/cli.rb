@@ -158,7 +158,7 @@ module RailsERD
         if options[:config_file] && options[:config_file] != ''
           RailsERD.options = RailsERD.default_options.merge(Config.load(options[:config_file]))
         end
-        new(path, options).start
+        new(path, RailsERD.options.merge(options)).start
       end
     end
 
