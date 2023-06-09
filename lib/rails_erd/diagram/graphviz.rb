@@ -249,7 +249,7 @@ module RailsERD
         if options[:cluster] && entity.namespace
           cluster_name = "cluster_#{entity.namespace}"
           cluster = graph.get_graph(cluster_name) ||
-                    graph.add_graph(cluster_name, cluster_attributes)
+                    graph.add_graph(cluster_name, cluster_attributes(entity))
 
           draw_cluster_node cluster, entity.name, entity_options(entity, attributes)
         else
