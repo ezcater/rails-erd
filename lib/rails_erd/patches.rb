@@ -88,7 +88,7 @@ module RailsERD
 
         def initialize(model_name)
           @model_name = model_name
-          loaded = Zeitwerk::Registry.loaders[0].to_unload.assoc(@model_name) # e.g. ["Account", ["/usr/src/app/app/models/account.rb", [Object, :Account]]]
+          loaded = Zeitwerk::Registry.loaders[0].send(:to_unload).assoc(@model_name) # e.g. ["Account", ["/usr/src/app/app/models/account.rb", [Object, :Account]]]
           @filepath = loaded&.dig(1, 0)
           @relpath = @filepath&.gsub "#{Rails.root}/", ""
         end
