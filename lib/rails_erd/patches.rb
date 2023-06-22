@@ -29,7 +29,7 @@ module RailsERD
         private
 
         def colors(attribute)
-          color_rules = JSON.parse ENV.fetch("RAILS_ERD_COLORS", "{}")
+          color_rules = JSON.parse(ENV.fetch("RAILS_ERD_COLORS", "{}"), symbolize_names: true)
           # [
           #  {
           #   table_color: "#RRGGBB", tables with a matching row get this color
@@ -41,11 +41,11 @@ module RailsERD
           #  }
           # ]
 
-          color_rules.each do |name_in: [], name_starts_with: [], name_ends_with: [], name_includes: [], **colors|
-            next unless name_in.any? { |str| attribute.name == str } ||
-              name_includes.any?    { |str| attribute.name.include?(str) } ||
-              name_ends_with.any?   { |str| attribute.name.ends_with?(str) } ||
-              name_starts_with.any? { |str| attribute.name.starts_with?(str) }
+          color_rules.each do |name_equals: [], name_starts_with: [], name_ends_with: [], name_includes: [], **colors|
+            next unless name_equals.any? { |str| attribute.name == str } ||
+              name_includes.any?         { |str| attribute.name.include?(str) } ||
+              name_ends_with.any?        { |str| attribute.name.ends_with?(str) } ||
+              name_starts_with.any?      { |str| attribute.name.starts_with?(str) }
 
             return colors
           end
